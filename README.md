@@ -1,24 +1,81 @@
-# README
+## users テーブル
+|Column|Type|Options|
+|------|----|-------|
+|user_name|strings|null :false, unique: true, index: true|
+|email    |strings|null :false, unique: true|
+|password |strings|null :false, unique: true|
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Association
+- has_many :contents 
+- has_many :companys
+- has_many :groups
 
-Things you may want to cover:
 
-* Ruby version
+## groups テーブル
+|Column|Type|Options|
+|------|----|-------|
+|group_name|strings|null :false, unique: true|
+|genre     |strings|null :false|
+|homepage  |strings||
+|image     |strings||
+|born_in   |integer||
+|activity  |text   ||
 
-* System dependencies
+### Association
+- has_many :musics
+- has_many :contents
+- has_many :users
 
-* Configuration
 
-* Database creation
+## companys テーブル
+|Column|Type|Options|
+|------|----|-------|
+|company_name    |strings|null :false, unique: true|
+|business        |strings|null :false|
+|company_email   |strings|null :false, unique: true|
+|address         |strings|null :false|
+|company_homepage|strings||
+|company_image   |strings||
 
-* Database initialization
+### Association
+- has_many :contents
+- has_many :users
 
-* How to run the test suite
 
-* Services (job queues, cache servers, search engines, etc.)
+## contents テーブル
+|Column|Type|Options|
+|------|----|-------|
+|expalanation|text|null :false|
+|image    |strings   ||
+|request  |text      ||
+|users_id |references|null :false, foriegn_key: true|
+|groups_id|references|null :false, foriegn_key: true|
 
-* Deployment instructions
+### Association
+- belongs_to :music
+- belongs_to :company
+- belongs_to :group
+- belongs_to :user
 
-* ...
+
+## musics テーブル
+|Column|Type|Options|
+|------|----|-------|
+|title      |strings|null :false|
+|music_url  |strings|null :false, unique: true|
+|relerse_day|integer|null :false|
+
+### Association
+- belongs_to :content
+- belongs_to :group
+
+
+## users_groups テーブル
+|Column|Type|Options|
+|------|----|-------|
+|users_id |references|null :false, foriegn_key: true|
+|music_url|references|null :false, foriegn_key: true|
+
+### Association
+- belongs_to :user
+- belongs_to :group

@@ -9,6 +9,7 @@ module TmOffer
     config.generators do |g|
       g.helper false
       g.test_framework false
+      g.coffee false
     end
   end
 end
